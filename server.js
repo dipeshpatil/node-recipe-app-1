@@ -12,6 +12,8 @@ connectDatabase();
 
 // Routes
 const userRoute = require("./routes/api/user");
+const authRoute = require("./routes/api/auth");
+const recipeRoute = require("./routes/api/recipe");
 
 const app = express();
 
@@ -23,10 +25,12 @@ app.get("/", (req, res) => res.send("API Running"));
 
 // Register Routes
 app.use("/api/users", userRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/recipe", recipeRoute);
 
 // Server Port Configuration
 const PORT = appConfig.port;
 app.listen(PORT, () => {
-  logger.info(`APP MODE => [${process.env.NODE_ENV ?? process.env.APP_ENV}]`);
-  logger.info(`SERVER PORT => [${PORT}]`);
+  console.log(`APP MODE => [${process.env.NODE_ENV ?? process.env.APP_ENV}]`);
+  console.log(`SERVER PORT => [${PORT}]`);
 });
