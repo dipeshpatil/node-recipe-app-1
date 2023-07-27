@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 
 if (![process.env.NODE_ENV, process.env.APP_ENV].includes("production"))
   require("dotenv").config({ path: "./config/environments/.env" });
@@ -16,6 +17,9 @@ const authRoute = require("./routes/api/auth");
 const recipeRoute = require("./routes/api/recipe");
 
 const app = express();
+
+// Enable CORS
+app.use(cors());
 
 // Init Middleware
 app.use(express.json({ extended: false }));

@@ -44,6 +44,9 @@ const recipeSchema = new mongoose.Schema(
     //   type: String,
     //   required: true,
     // },
+    image: {
+      type: String,
+    },
     difficultyLevel: {
       type: String,
       enum: ["Easy", "Medium", "Hard"],

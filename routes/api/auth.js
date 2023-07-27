@@ -3,6 +3,7 @@ const express = require("express");
 const AuthController = require("../../controllers/auth");
 
 const { basicUserLoginValidator } = require("../../validators/auth");
+const { authenticationMiddleware } = require("../../middlewares/auth");
 
 const router = express.Router();
 const authController = new AuthController();
@@ -12,7 +13,11 @@ const authController = new AuthController();
  * @desc    Get User
  * @access  Private
  */
-router.get("/", authController.getUser.bind(authController));
+router.get(
+  "/",
+  [authenticationMiddleware],
+  authController.getUser.bind(authController)
+);
 
 /**
  * @route   POST api/auth
