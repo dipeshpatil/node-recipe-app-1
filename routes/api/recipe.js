@@ -37,7 +37,7 @@ router.post(
  * @access  Private
  */
 router.delete(
-  "/",
+  "/:recipeId",
   [authenticationMiddleware],
   recipeController.delete.bind(recipeController)
 );

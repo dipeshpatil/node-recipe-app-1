@@ -40,7 +40,29 @@ class RecipeController {
 
   async edit(req, res) {}
 
-  async delete(req, res) {}
+  async delete(req, res) {
+    try {
+      const recipe = await Recipe.findOne({
+        _id: req.params.recipeId,
+      });
+
+      if (!recipe) {
+        return res.status(404).send("Recipe Not Found");
+      }
+
+      const deletedRecipe = await Recipe.findOneAndDelete({
+        _id: req.params.recipeId,
+      });
+
+      return res.json({
+        recipe: deletedRecipe,
+        msg: "Recipe Deleted Successfully",
+      });
+    } catch (error) {
+      logger.error(`[RECIPE DELETE ERROR]: ${error.message}`);
+      return res.json(error.message);
+    }
+  }
 }
 
 module.exports = RecipeController;
